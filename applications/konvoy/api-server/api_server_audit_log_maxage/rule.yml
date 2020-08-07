@@ -1,0 +1,47 @@
+documentation_complete: true
+
+prodtype: konvoy5
+
+title: 'Configure the Audit Log Maximum Retention Days (maximumFileRetentionDays)'
+
+description: |-
+    To configure audit log retention, edit the API Server pod specification file
+{{%- if product == "konvoy5" %}}
+    <tt>/etc/kubernetes/static-pod-resources/configmaps/config/config.yaml</tt> on the master node(s) and set
+    the <tt>maximumFileRetentionDays</tt> parameter to <tt>30</tt> or as appropriate for the number of days:
+    <pre>
+    "auditConfig":{
+      ...
+      "maximumFileRetentionDays":30,
+      ...
+     </pre>
+{{% else %}}
+    <tt>/etc/kubernetes/manifests/kube-apiserver.yaml</tt> on the master node(s) and set
+    the <tt>maximumFileRetentionDays</tt> parameter to <tt>30</tt> or as appropriate for the number of days:
+    <pre>auditConfig:
+      auditFilePath: "/etc/kubernetes/manifests/audit-konvoy.log"
+      enabled: true
+      maximumFileRetentionDays: 30
+      maximumFileSizeMegabytes: 10
+      maximumRetainedFiles: 10</pre>
+{{%- endif %}}
+
+rationale: |-
+    Retaining audit logs for a specified period of time allows Konvoy Operators
+    to retroactively review and correlate events, such as for investigative purposes.
+
+severity: medium
+
+references:
+    cis: 1.2.23
+
+ocil_clause: '<tt>maximumFileRetentionDays</tt> is set less than <tt>30</tt> or as appropriate'
+
+ocil: |-
+    Run the following command on the master node(s):
+{{%- if product == "konvoy5" %}}
+    <pre>$ sudo grep maximumFileRetentionDays /etc/kubernetes/static-pod-resources/configmaps/config/config.yaml</pre>
+{{% else %}}
+    <pre>$ sudo grep maximumFileRetentionDays /etc/kubernetes/manifests/kube-apiserver.yaml</pre>
+{{%- endif %}}
+    The output should return a value of <pre>30</pre> or as appropriate.

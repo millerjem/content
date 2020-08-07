@@ -1,0 +1,8 @@
+documentation_complete: true
+
+prodtype: konvoy5
+
+title: 'Konvoy API Server'
+
+description: |-
+    This section contains recommendations for kube-apiserver configuration.

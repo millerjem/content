@@ -1,0 +1,29 @@
+documentation_complete: true
+
+prodtype: konvoy5
+
+title: 'Verify Group Who Owns The Konvoy Node Kubeconfig File'
+
+description: '{{{ describe_file_group_owner(file="/var/lib/kubelet/config.yaml", group="root") }}}'
+rationale: |-
+    The <tt>/var/lib/kubelet/config.yaml</tt> file contains information about the configuration of the
+    Konvoy node that is configured on the system. Protection of this file is
+    critical for Konvoy security.
+
+severity: medium
+
+identifiers:
+    cce@konvoy5: 80618-2
+
+references:
+    cis: 2.2.2
+
+ocil_clause: '{{{ ocil_clause_file_group_owner(file="/var/lib/kubelet/config.yaml", group="root") }}}'
+
+ocil: '{{{ ocil_file_group_owner(file="/var/lib/kubelet/config.yaml", group="root") }}}'
+
+template:
+    name: file_groupowner
+    vars:
+        filepath: /var/lib/kubelet/config.yaml
+        filegid: '0'

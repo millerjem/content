@@ -1,0 +1,40 @@
+documentation_complete: true
+
+prodtype: konvoy5
+
+title: 'Disable basic-auth-file for the API Server'
+
+description: |-
+    Basic Authentication should not be used. Follow the Konvoy documentation
+    and configure alternate mechanisms for authentication. Then, edit API
+{{%- if product == "konvoy5" %}}
+    server pod specification file <tt>/etc/kubernetes/manifests/kube-apiserver.yaml</tt>
+    on the master node and remove the <tt>basic-auth-file</tt> parameter.
+    <pre>
+        basic-auth-file:
+        - /path/to/any/file</pre>
+{{%- endif %}}
+
+    Alternate authentication mechanisms such as tokens and certificates will need to be
+    used. Username and password for basic authentication will be disabled.
+
+rationale: |-
+    Basic authentication uses plaintext credentials for authentication.
+    Currently the basic authentication credentials last indefinitely, and
+    the password cannot be changed without restarting the API Server. The
+    Basic Authentication is currently supported for convenience and is
+    not intended for production workloads.
+
+severity: medium
+
+references:
+    cis: 1.2.2
+
+ocil_clause: 'basic-auth-file is configured and enabled on the master node'
+
+ocil: |-
+    Run the following command on the master node(s):
+{{%- if product == "konvoy5" %}}
+    <pre>$ sudo grep -A2 basic-auth-file /etc/kubernetes/manifests/kube-apiserver.yaml</pre>
+{{%- endif %}}
+    The output should return no output.

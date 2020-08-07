@@ -1,0 +1,38 @@
+documentation_complete: true
+
+prodtype: konvoy5
+
+title: 'Verify Controller profiling is not exposed to the Web'
+
+description: |-
+    Profiling endpoints are exposed at each master port and secured via Role-Based
+    Access Control (RBAC). By default profiling is accessible only to users bound to
+    <tt>cluster-admin</tt> or <tt>cluster-debugger</tt> roles, limiting access to authorized
+    users only.
+
+    Should <tt>profiling</tt> be set to <tt>true</tt>, reflecting a change from
+    the secure defaults, this profiling data will be exposed via a web interface on the
+    systems localhost interface.
+
+    To ensure profiling data is not exposed over a web interface, ensure
+    <tt>profiling</tt> is not set to <tt>true</tt> in <tt>/etc/kubernetes/manifests/kube-controller-manager.yaml</tt>.
+
+rationale: |-
+    Profiling data may include sensitive system information which could be exploited.
+
+severity: low
+
+identifiers:
+    cce@konvoy5: 83000-0
+
+ocil_clause: |-
+    <tt>profiling</tt> is configured to <tt>true</tt>
+
+ocil: |-
+    Verify that <tt>profiling</tt> is not set to <tt>web</tt> by running the following command:
+    <pre>$ grep profiling /etc/kubernetes/manifests/kube-controller-manager.yaml</pre>
+
+    Verify that <tt>profiling=true</tt> is NOT returned.
+
+references:
+    cis: 1.1.8

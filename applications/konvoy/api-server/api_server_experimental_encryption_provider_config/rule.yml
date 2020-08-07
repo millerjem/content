@@ -1,0 +1,34 @@
+documentation_complete: true
+
+prodtype: konvoy5
+
+title: 'Configure the Encryption Provider'
+
+description: |-
+    To encrypt the etcd key-value store, follow the Konvoy documentation
+    and configure a <tt>EncryptionConfig</tt> file. Then, edit the API Server
+    pod specification file
+    <tt>/etc/kubernetes/manifests/kube-apiserver.yaml</tt> on the master
+    node(s) and set <tt>experimental-encryption-provider-config</tt>
+    to the path of that file:
+    <pre>
+        experimental-encryption-provider-config:
+        - /etc/kubernetes/manifests/kube-apiserver.yaml</pre>
+
+rationale: |-
+    etcd is a highly available key-value store used by Konvoy deployments
+    for persistent storage of all REST API objects. These objects are
+    sensitive in nature and should be encrypted at rest to avoid any
+    disclosures.
+
+severity: medium
+
+references:
+    cis: 1.1.33
+
+ocil_clause: '<tt>experimental-encryption-provider-config</tt> arguments do not point to the <tt>EncryptionConfig</tt> file'
+
+ocil: |-
+    Run the following command on the master node(s):
+    <pre>$ sudo grep -A2 experimental-encryption-provider-config /etc/kubernetes/manifests/kube-apiserver.yaml</pre>
+    The output should return <pre>/etc/kubernetes/manifests/kube-apiserver.yaml</pre>.

@@ -1,0 +1,23 @@
+documentation_complete: true
+
+prodtype: konvoy5
+
+title: 'The Konvoy Configuration Directory Must Have Mode 0700'
+
+description: |-
+    {{{ describe_file_permissions(file="/etc/kubernetes/", perms="0700") }}}
+
+rationale: 'If users can modify the Konvoy configurations, the Konvoy cluster can become inoperable or compromised'
+
+severity: medium
+
+ocil_clause: '{{{ ocil_clause_file_permissions(file="/etc/kubernetes/", perms="-rwx------") }}}'
+
+ocil: |-
+    {{{ ocil_file_permissions(file="/etc/kubernetes/", perms="-rwx------") }}}
+
+template:
+    name: file_permissions
+    vars:
+        filepath: /etc/kubernetes/
+        filemode: '0700'

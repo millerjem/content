@@ -1,0 +1,24 @@
+<def-group>
+  <definition class="compliance" id="controller_disable_profiling" version="1">
+    <metadata>
+      <title>Ensure profiling is not set to true</title>
+      <affected family="unix">
+        <platform>multi_platform_konvoy</platform>
+      </affected>
+      <description>Ensure profiling is not set to true.</description>
+    </metadata>
+    <criteria operator="AND">
+      <criterion comment="profiling is not set to true" test_ref="test_controller_disable_profiling" />
+    </criteria>
+  </definition>
+
+  <ind:textfilecontent54_test check="all" check_existence="none_exist" comment="Profiling is not set to true" id="test_controller_disable_profiling" version="1">
+    <ind:object object_ref="object_controller_disable_profiling" />
+  </ind:textfilecontent54_test>
+
+  <ind:textfilecontent54_object id="object_controller_disable_profiling" version="1">
+    <ind:filepath>/etc/kubernetes/manifests/kube-controller-manager.yaml</ind:filepath>
+    <ind:pattern operation="pattern match">^[\s]*profiling=true*$</ind:pattern>
+    <ind:instance datatype="int">1</ind:instance>
+  </ind:textfilecontent54_object>
+</def-group>

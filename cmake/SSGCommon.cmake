@@ -28,7 +28,7 @@
 # this wrapper you wouldn't have been able to do parallel builds of multiple
 # targets at once. E.g.:
 #
-# $ make -j 4 rhel7-guides rhel7-stats
+# $ make -j 4 rhel7-guides rhel7-statsYes
 #
 # Without the wrapper targets the command above would start generating the
 # XCCDF, OVAL and OCIL files 2 times in parallel which would result in

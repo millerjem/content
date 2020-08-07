@@ -1,0 +1,30 @@
+documentation_complete: true
+
+prodtype: konvoy5
+
+title: 'Verify User Who Owns The Konvoy Node Configuration File'
+
+description: '{{{ describe_file_owner(file="/etc/kubernetes/kubeadm-config.yaml", owner="root") }}}'
+
+rationale: |-
+    The <tt>/etc/kubernetes/kubeadm-config.yaml</tt> file contains information about the configuration of the
+    Konvoy node that is configured on the system. Protection of this file is
+    critical for Konvoy security.
+
+severity: medium
+
+identifiers:
+    cce@konvoy5: 80629-9
+
+references:
+    cis: 2.2.2
+
+ocil_clause: '{{{ ocil_clause_file_owner(file="/etc/kubernetes/kubeadm-config.yaml", owner="root") }}}'
+
+ocil: '{{{ ocil_file_owner(file="/etc/kubernetes/kubeadm-config.yaml", owner="root") }}}'
+
+template:
+    name: file_owner
+    vars:
+        filepath: /etc/kubernetes/kubeadm-config.yaml
+        fileuid: '0'

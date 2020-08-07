@@ -1,0 +1,40 @@
+documentation_complete: true
+
+prodtype: konvoy5
+
+title: 'Ensure API Server authorization-mode is set to Webhook'
+
+description: |-
+    By default, unauthenticated/unauthorized users have no access to Konvoy nodes
+    and the API Server <tt>authorization-mode</tt> is set to <tt>Webhook</tt>.
+    To ensure that the API server requires authorization for API requests,
+    validate that <tt>authorization-mode</tt> is configured to <tt>Webhook</tt>
+{{%- if product == "konvoy5" %}}
+    in <tt>/etc/kubernetes/manifests/kube-apiserver.yaml</tt>:
+    <pre>
+      authorization-mode:
+        - Webhook</pre>
+{{%- endif %}}
+
+warnings:
+  - functionality: |-
+      If <tt>authorization-mode</tt> is not configured to <tt>Webhook</tt>, the node
+      systemd service will not start.
+
+rationale: |-
+    Ensuring <tt>authorization-mode</tt> is set to <tt>Webhook</tt> helps enforce that
+    unauthenticated/unauthorized users have no access to Konvoy nodes.
+
+severity: medium
+
+references:
+    cis: 1.2.7,1.2.8,1.2.9
+
+ocil_clause: '<tt>authorization-mode</tt> is not configured to <tt>Webhook</tt>'
+
+ocil: |-
+    Run the following command on the master node(s):
+{{%- if product == "konvoy5" %}}
+    <pre>$ sudo grep -A1 authorization-mode /etc/kubernetes/manifests/kube-apiserver.yaml</pre>
+{{%- endif %}}
+    Verify that there is no output, or the output is set to <tt>Webhook</tt>.

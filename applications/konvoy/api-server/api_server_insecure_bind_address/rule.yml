@@ -1,0 +1,36 @@
+documentation_complete: true
+
+prodtype: konvoy5
+
+title: 'Disable Use of the Insecure Bind Address'
+
+description: |-
+    Konvoy should not bind to non-loopback insecure addresses. Edit the API
+{{%- if product == "konvoy5" %}}
+    Server pod specification file <tt>/etc/kubernetes/manifests/kube-apiserver.yaml</tt>
+    on the master node(s) and remove the <tt>insecure-bind-address</tt>
+    parameter.
+    <pre>
+        insecure-bind-address:
+        - 127.0.0.1</pre>
+{{%- endif %}}
+
+rationale: |-
+    If the API Server is bound to an insecure address the installation would
+    be susceptible to unauthented and unencrypted access to the master node(s).
+    The API Server does not perform authentication checking for insecure
+    binds and the traffic is generally not encrypted.
+
+severity: medium
+
+references:
+    cis: 1.2.18
+
+ocil_clause: 'insecure-bind-address is exists and has not been removed</tt>'
+
+ocil: |-
+    Run the following command on the master node(s):
+{{%- if product == "konvoy5" %}}
+    <pre>$ sudo grep -A2 insecure-bind-address /etc/kubernetes/manifests/kube-apiserver.yaml</pre>
+{{%- endif %}}
+    No output should be returned.

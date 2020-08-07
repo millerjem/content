@@ -1,0 +1,15 @@
+<def-group>
+  <definition class="inventory" id="installed_app_is_konvoy5" version="1">
+    <metadata>
+      <title>Konvoy 5</title>
+      <affected family="unix">
+        <platform>multi_platform_all</platform>
+      </affected>
+      <reference ref_id="cpe:/a:d2iq:konvoy:5" source="CPE" />
+      <description>The application installed installed on the system is Konvoy.</description>
+    </metadata>
+    <criteria>
+      <extend_definition comment="RHEL7 OS installed" definition_ref="installed_OS_is_rhel7" />
+    </criteria>
+  </definition>
+</def-group>

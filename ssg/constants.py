@@ -22,7 +22,8 @@ product_directories = [
     'rhv4',
     'sle11', 'sle12', 'sle15',
     'ubuntu1404', 'ubuntu1604', 'ubuntu1804',
-    'wrlinux8', 'wrlinux1019'
+    'wrlinux8', 'wrlinux1019',
+    'konvoy5'
 ]
 
 JINJA_MACROS_BASE_DEFINITIONS = os.path.join(os.path.dirname(os.path.dirname(
@@ -78,7 +79,7 @@ XCCDF12_NS = "http://checklists.nist.gov/xccdf/1.2"
 min_ansible_version = "2.5"
 ansible_version_requirement_pre_task_name = \
     "Verify Ansible meets SCAP-Security-Guide version requirements."
-standard_profiles = ['standard', 'pci-dss', 'desktop', 'server']
+standard_profiles = ['standard', 'pci-dss', 'desktop', 'server', 'moderate']
 
 
 OVAL_SUB_NS = dict(
@@ -169,6 +170,7 @@ FULL_NAME_TO_PRODUCT_MAPPING = {
     "Ubuntu 18.04": "ubuntu1804",
     "WRLinux 8": "wrlinux8",
     "WRLinux 1019": "wrlinux1019",
+    "Konvoy 1.5": "konvoy5",
 }
 
 PRODUCT_TO_CPE_MAPPING = {
@@ -313,6 +315,9 @@ PRODUCT_TO_CPE_MAPPING = {
     "wrlinux1019": [
         "cpe:/o:windriver:wrlinux:1019",
     ],
+    "konvoy5": [
+        "cpe:/a:d2iq:konvoy:5",
+    ],
 }
 
 STIG_PLATFORM_ID_MAP = {
@@ -335,7 +340,7 @@ REF_PREFIX_MAP = {
 }
 
 MULTI_PLATFORM_LIST = ["rhel", "fedora", "rhosp", "rhv", "debian", "ubuntu",
-                       "wrlinux", "opensuse", "sle", "ol", "ocp", "example"]
+                       "wrlinux", "opensuse", "sle", "ol", "ocp", "example", "konvoy"]
 
 MULTI_PLATFORM_MAPPING = {
     "multi_platform_debian": ["debian8", "debian9", "debian10"],
@@ -350,6 +355,7 @@ MULTI_PLATFORM_MAPPING = {
     "multi_platform_sle": ["sle11", "sle12", "sle15"],
     "multi_platform_ubuntu": ["ubuntu1404", "ubuntu1604", "ubuntu1804"],
     "multi_platform_wrlinux": ["wrlinux8", "wrlinux1019"],
+    "multi_platform_konvoy": ["konvoy5"],
 }
 
 RHEL_CENTOS_CPE_MAPPING = {
@@ -516,6 +522,7 @@ MAKEFILE_ID_TO_PRODUCT_MAP = {
     'example': 'Example Linux Content',
     'ol': 'Oracle Linux',
     'ocp': 'Red Hat OpenShift Container Platform',
+    'konvoy': 'D2iQ Konvoy Kubernetes Platform',
 }
 
 

@@ -1,0 +1,33 @@
+documentation_complete: true
+
+prodtype: konvoy5
+
+title: 'Verify Permissions on the Konvoy etcd Specification File'
+
+description: |-
+    {{{ describe_file_permissions(file="/etc/kubernetes/manifests/etcd.yaml", perms="0600") }}}
+
+rationale: |-
+    If the <tt>/etc/kubernetes/manifests/etcd.yaml</tt> file is writable by a group-owner or the
+    world the risk of its compromise is increased. The file contains the configuration of
+    an Konvoy etcd server that is configured on the system. Protection of this file is
+    critical for Konvoy security.
+
+severity: medium
+
+identifiers:
+    cce@konvoy5: 80636-4
+
+references:
+    cis: 1.4.7
+
+ocil_clause: '{{{ ocil_clause_file_permissions(file="/etc/kubernetes/manifests/etcd.yaml", perms="-rw-------") }}}'
+
+ocil: |-
+    {{{ ocil_file_permissions(file="/etc/kubernetes/manifests/etcd.yaml", perms="-rw-------") }}}
+
+template:
+    name: file_permissions
+    vars:
+        filepath: /etc/kubernetes/manifests/etcd.yaml
+        filemode: '0600'

@@ -1,0 +1,30 @@
+documentation_complete: true
+
+prodtype: konvoy5
+
+title: 'Verify User Who Owns The Konvoy Node Service File'
+
+description: '{{{ describe_file_owner(file="/etc/systemd/system/kubelet.service.d/0-containerd.conf", owner="root") }}}'
+
+rationale: |-
+    The <tt>/etc/systemd/system/kubelet.service.d/0-containerd.conf</tt> file contains information about the configuration of the
+    Konvoy node service that is configured on the system. Protection of this file is
+    critical for Konvoy security.
+
+severity: medium
+
+identifiers:
+    cce@konvoy5: 80632-3
+
+references:
+    cis: 2.2.4
+
+ocil_clause: '{{{ ocil_clause_file_owner(file="/etc/systemd/system/kubelet.service.d/0-containerd.conf", owner="root") }}}'
+
+ocil: '{{{ ocil_file_owner(file="/etc/systemd/system/kubelet.service.d/0-containerd.conf", owner="root") }}}'
+
+template:
+    name: file_owner
+    vars:
+        filepath: /etc/systemd/system/kubelet.service.d/0-containerd.conf
+        fileuid: '0'

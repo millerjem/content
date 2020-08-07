@@ -1,0 +1,36 @@
+documentation_complete: true
+
+prodtype: konvoy5
+
+title: 'Manage Image Provenance Using ImagePolicyWebhook Adminission'
+
+description: |-
+    Konvoy administrators can control which images can be imported, tagged, and run in a cluster.
+    There are two facilities for this purpose: (1) Allowed Registries, allowing administrators to
+    restrict image origins to known external registries; and (2) ImagePolicy Admission plug-in which lets
+    administrators specify specific images which are allowed to run on the Konvoy cluster.
+
+    Configure Image Provenance using the <tt>ImagePolicyWebhook</tt> admission controller per
+    the Image Policy chapter in the Cluster Administration documentation:
+
+rationale: |-
+    Image Policy ensures that only approved container images are allowed to be ran on the Konvoy platform.
+
+severity: medium
+
+ocil_clause: 'an image provenance policy is not configured'
+
+ocil: |-
+    Review <tt>ImagePolicyConfig</tt> in <tt>/etc/kubernetes/manifests/kube-apiserver.yaml</tt>:
+    <pre>$ grep admissionConfig /etc/kubernetes/manifests/kube-apiserver.yaml</pre>
+
+    Look for the following:
+    <pre>admissionConfig:
+      pluginConfig:
+    </pre>
+
+identifiers:
+    cce@konvoy5: 81001-0
+
+references:
+    cis: 1.6.7

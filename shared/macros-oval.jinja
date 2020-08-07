@@ -473,6 +473,19 @@
     <unix:command_line operation="pattern match">^.*[\s]+{{{ option }}}=.*({{{ value }}}).*([\s]+.*$|$)</unix:command_line>
   </unix:process58_state>
 {{%- endmacro -%}}
+{{%- macro oval_konvoy_service_runtime_config(command='', option='', value='', option_id='') -%}}
+  <unix:process58_test check="all" comment="konvoy process runtime parameter {{{ option }}} set to {{{ value }}}" id="test_konvoy_runtime_{{{ option_id }}}" version="1">
+    <unix:object object_ref="object_konvoy_runtime_{{{ option_id }}}" />
+    <unix:state state_ref="state_konvoy_runtime_{{{ option_id }}}" />
+  </unix:process58_test>
+  <unix:process58_object id="object_konvoy_runtime_{{{ option_id }}}" version="1">
+    <unix:command_line operation="pattern match">^{{{ command }}}.*$</unix:command_line>
+    <unix:pid datatype="int" operation="greater than">0</unix:pid>
+  </unix:process58_object>
+  <unix:process58_state id="state_konvoy_runtime_{{{ option_id }}}" version="1">
+    <unix:command_line operation="pattern match">^.*[\s]+{{{ option }}}=.*({{{ value }}}).*([\s]+.*$|$)</unix:command_line>
+  </unix:process58_state>
+{{%- endmacro -%}}
 
 {{#
   Macro which generates OVAL definition, test and object that check for contents

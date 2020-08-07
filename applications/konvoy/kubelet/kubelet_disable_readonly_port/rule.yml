@@ -1,0 +1,34 @@
+documentation_complete: true
+
+prodtype: konvoy5
+
+title: 'kubelet - Disable the Read-Only Port'
+
+description: |-
+    To disable the read-only port, edit the kubelet configuration
+    file <tt>/var/lib/kubelet/config.yaml</tt>
+    on the kubelet node(s) and set the below parameter:
+    <pre>kubeletArguments:
+      read-only-port:
+      - '0'</pre>
+
+rationale: |-
+    Konvoy disables the read-only port (<tt>10255</tt>) on all nodes by setting the
+    <tt>read-only-port</tt> kubelet flag to <tt>0</tt>. This ensures only
+    authenticated connections are able to receive information about the Konvoy
+    system.
+
+severity: medium
+
+ocil_clause: 'the read-only port is not disabled'
+
+ocil: |-
+    Run the following command on the kubelet node(s):
+    <pre>$ sudo grep -A1 read-only-port /var/lib/kubelet/config.yaml</pre>
+    The output should be <tt>0</tt>.
+
+identifiers:
+    cce@konvoy5: 80601-8
+
+references:
+    cis: 2.1.5

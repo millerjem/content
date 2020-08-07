@@ -1,0 +1,33 @@
+documentation_complete: true
+
+prodtype: konvoy5
+
+title: 'Verify Permissions on the Konvoy Node Kubeconfig File'
+
+description: |-
+    {{{ describe_file_permissions(file="/var/lib/kubelet/config.yaml", perms="0600") }}}
+
+rationale: |-
+    If the <tt>/var/lib/kubelet/config.yaml</tt> file is writable by a group-owner or the
+    world the risk of its compromise is increased. The file contains the configuration of
+    an Konvoy node that is configured on the system. Protection of this file is
+    critical for Konvoy security.
+
+severity: medium
+
+identifiers:
+    cce@konvoy5: 80641-4
+
+references:
+    cis: 2.2.1
+
+ocil_clause: '{{{ ocil_clause_file_permissions(file="/var/lib/kubelet/config.yaml", perms="-rw-------") }}}'
+
+ocil: |-
+    {{{ ocil_file_permissions(file="/var/lib/kubelet/config.yaml", perms="-rw-------") }}}
+
+template:
+    name: file_permissions
+    vars:
+        filepath: /var/lib/kubelet/config.yaml
+        filemode: '0600'

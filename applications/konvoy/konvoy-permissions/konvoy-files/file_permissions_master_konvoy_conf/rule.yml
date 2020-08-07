@@ -1,0 +1,33 @@
+documentation_complete: true
+
+prodtype: konvoy5
+
+title: 'Verify Permissions on the Konvoy Master Configuration File'
+
+description: |-
+    {{{ describe_file_permissions(file="/etc/kubernetes/manifests/kube-apiserver.yaml", perms="0600") }}}
+
+rationale: |-
+    If the <tt>/etc/kubernetes/manifests/kube-apiserver.yaml</tt> file is writable by a group-owner or the
+    world the risk of its compromise is increased. The file contains the master configuration of
+    an Konvoy cluster that is configured on the system. Protection of this file is
+    critical for Konvoy security.
+
+severity: medium
+
+identifiers:
+    cce@konvoy5: 80637-2
+
+references:
+    cis: 1.4.17
+
+ocil_clause: '{{{ ocil_clause_file_permissions(file="/etc/kubernetes/manifests/kube-apiserver.yaml", perms="-rw-------") }}}'
+
+ocil: |-
+    {{{ ocil_file_permissions(file="/etc/kubernetes/manifests/kube-apiserver.yaml", perms="-rw-------") }}}
+
+template:
+    name: file_permissions
+    vars:
+        filepath: /etc/kubernetes/manifests/kube-apiserver.yaml
+        filemode: '0600'

@@ -1,0 +1,30 @@
+documentation_complete: true
+
+prodtype: konvoy5
+
+title: 'Verify User Who Owns The Konvoy Scheduler Configuration File'
+
+description: '{{{ describe_file_owner(file="/etc/kubernetes/manifests/kube-scheduler.yaml", owner="root") }}}'
+
+rationale: |-
+    The <tt>/etc/kubernetes/manifests/kube-scheduler.yaml</tt> file contains information about the configuration of the
+    Konvoy scheduler that is configured on the system. Protection of this file is
+    critical for Konvoy security.
+
+severity: medium
+
+identifiers:
+    cce@konvoy5: 80628-1
+
+references:
+    cis: 1.4.16
+
+ocil_clause: '{{{ ocil_clause_file_owner(file="/etc/kubernetes/manifests/kube-scheduler.yaml", owner="root") }}}'
+
+ocil: '{{{ ocil_file_owner(file="/etc/kubernetes/manifests/kube-scheduler.yaml", owner="root") }}}'
+
+template:
+    name: file_owner
+    vars:
+        filepath: /etc/kubernetes/manifests/kube-scheduler.yaml
+        fileuid: '0'

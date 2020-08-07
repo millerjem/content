@@ -1,0 +1,33 @@
+documentation_complete: true
+
+prodtype: konvoy5
+
+title: 'Verify Permissions on Konvoy Node Certificate File'
+
+description: |-
+    {{{ describe_file_permissions(file="/etc/kubernetes/pki/ca.crt", perms="0644") }}}
+
+rationale: |-
+    If the <tt>/etc/kubernetes/pki/ca.crt</tt> file is writable by a group-owner or the
+    world the risk of its compromise is increased. The file contains the certificate authority
+    certificate for an Konvoy node that is configured on the system. Protection of this file is
+    critical for Konvoy security.
+
+severity: medium
+
+identifiers:
+    cce@konvoy5: 80642-2
+
+references:
+    cis: 2.2.
+
+ocil_clause: '{{{ ocil_clause_file_permissions(file="/etc/kubernetes/pki/ca.crt", perms="-rw-r--r--") }}}'
+
+ocil: |-
+    {{{ ocil_file_permissions(file="/etc/kubernetes/pki/ca.crt", perms="-rw-r--r--") }}}
+
+template:
+    name: file_permissions
+    vars:
+        filepath: /etc/kubernetes/pki/ca.crt
+        filemode: '0600'

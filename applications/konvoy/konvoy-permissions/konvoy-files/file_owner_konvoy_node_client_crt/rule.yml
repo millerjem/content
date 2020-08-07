@@ -1,0 +1,30 @@
+documentation_complete: true
+
+prodtype: konvoy5
+
+title: 'Verify User Who Owns Konvoy Node Certificate File'
+
+description: '{{{ describe_file_owner(file="/etc/kubernetes/pki/ca.crt", owner="root") }}}'
+
+rationale: |-
+    The <tt>/etc/kubernetes/pki/ca.crt</tt> file contains the certificate authority
+    certificate for an Konvoy node that is configured on the system. Protection of this file is
+    critical for Konvoy security.
+
+severity: medium
+
+identifiers:
+    cce@konvoy5: 80631-5
+
+references:
+    cis: 2.2.8
+
+ocil_clause: '{{{ ocil_clause_file_owner(file="/etc/kubernetes/pki/ca.crt", owner="root") }}}'
+
+ocil: '{{{ ocil_file_owner(file="/etc/kubernetes/pki/ca.crt", owner="root") }}}'
+
+template:
+    name: file_owner
+    vars:
+        filepath: /etc/kubernetes/pki/ca.crt
+        fileuid: '0'

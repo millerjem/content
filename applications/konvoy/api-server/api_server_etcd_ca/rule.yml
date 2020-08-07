@@ -1,0 +1,41 @@
+documentation_complete: true
+
+prodtype: konvoy5
+
+title: 'Configure the etcd Certificate Authority for the API Server'
+
+description: |-
+    To ensure etcd is configured to make use of TLS encryption for client
+    connections, follow the Konvoy documentation and setup the TLS
+    connection between the API Server and etcd. Then, verify
+{{%- if product == "konvoy5" %}}
+    that <tt>etcd</tt> has the <tt>ca</tt> configured in 
+    the API Server pod specification file
+    <tt>/etc/kubernetes/manifests/kube-apiserver.yaml</tt> on the master
+    node(s) to something similar to:
+    <pre>
+      --etcd-cafile=/etc/kubernetes/pki/etcd/ca.crt</pre>
+{{%- endif %}}
+
+rationale: |-
+    etcd is a highly-available key-value store used by Konvoy deployments
+    for persistent storage of all REST API objects. These objects are
+    sensitive in nature and should be protected by client authentication. This
+    requires the API Server to identify itself to the etcd server using
+    a SSL Certificate Authority file.
+
+severity: medium
+
+references:
+    cis: 1.2.32
+
+ocil_clause: '{{%- if product == "konvoy5" %}}<tt>ca</tt> is not set as appropriate for <tt>etcd</tt>{{% else %}}<tt>ca</tt> is not set as appropriate for <tt>storageConfig</tt>{{%- endif %}}'
+
+ocil: |-
+    Run the following command on the master node(s):
+{{%- if product == "konvoy5" %}}
+    <pre>$ sudo grep -A3 etcd /etc/kubernetes/manifests/kube-apiserver.yaml</pre>
+    The output should contain something similar to:
+    <pre>
+      --etcd-cafile=/etc/kubernetes/pki/etcd/ca.crt</pre>
+{{%- endif %}}

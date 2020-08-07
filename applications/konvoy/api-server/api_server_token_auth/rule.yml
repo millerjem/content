@@ -1,0 +1,37 @@
+documentation_complete: true
+
+prodtype: konvoy5
+
+title: 'Disable Token-based Authentication'
+
+description: |-
+    To ensure Konvoy does not accept token-based authentication,
+    follow the Konvoy documentation and configure alternate mechanisms for
+    authentication. Then, edit the API Server pod specification file
+{{%- if product == "konvoy5" %}}
+    <tt>/etc/kubernetes/manifests/kube-apiserver.yaml</tt> on the master
+    node(s) and remove the <tt>token-auth-file</tt> setting.
+    <pre>
+        token-auth-file:
+        - /path/to/file</pre>
+{{%- endif %}}
+
+rationale: |-
+    The token-based authentication utilizes static tokens to authenticate
+    requests to the API Server. The tokens are stored in clear-text in a file
+    on the API Server, and cannot be revoked or rotated without restarting the
+    API Server.
+
+severity: high
+
+references:
+    cis: 1.2.3
+
+ocil_clause: '<tt>token-auth-file</tt> argument is configured'
+
+ocil: |-
+    Run the following command on the master node(s):
+{{%- if product == "konvoy5" %}}
+    <pre>$ sudo grep -A2 token-auth-file /etc/kubernetes/manifests/kube-apiserver.yaml</pre>
+{{%- endif %}}
+    The output should return no output.
