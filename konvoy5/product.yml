@@ -6,7 +6,14 @@ benchmark_root: "../applications"
 
 additional_content_directories:
     - "../linux_os/guide/services"
-    - "../linux_os/guide/system"
+    - "../linux_os/guide/system/auditing"
+    - "../linux_os/guide/system/selinux"
+    - "../linux_os/guide/system/software"
+    - "../linux_os/guide/system/accounts"
+    - "../linux_os/guide/system/permissions"
+    - "../linux_os/guide/system/logging"
+    - "../linux_os/guide/system/bootloader-grub2"
+    - "../linux_os/guide/system/network"
 
 profiles_root: "./profiles"
 
