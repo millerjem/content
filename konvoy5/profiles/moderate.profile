@@ -5,7 +5,7 @@ title: 'NIST 800-53 Moderate-Impact Baseline for Red Hat Enterprise Linux'
 description: |-
     This compliance profile reflects the core set of Moderate-Impact Baseline
     configuration settings for deployment of Red Hat Enterprise
-    Linux CoreOS into U.S. Defense, Intelligence, and Civilian agencies.
+    Linux into U.S. Defense, Intelligence, and Civilian agencies.
     Development partners and sponsors include the U.S. National Institute
     of Standards and Technology (NIST), U.S. Department of Defense,
     the National Security Agency, and Red Hat.
